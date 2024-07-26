@@ -2,7 +2,7 @@
 $powershell_arguments = '-NoProfile -ExecutionPolicy Bypass -File'
 $check_file_integrity_script = 'C:\ProgramData\fim\scripts\CheckFileIntegrity.ps1'
 $fimscanscheduletime = '3:00AM' # Adjust this value as needed
-s
+
 # Define paths
 $fimFolderPath = 'C:\ProgramData\fim'
 $logsFolderPath = 'C:\ProgramData\fim\logs'

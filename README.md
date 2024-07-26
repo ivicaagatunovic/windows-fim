@@ -1,5 +1,5 @@
 # Windows-Fim
-File Integrity Monitoring (FIM) PowerShell Scripts 
+File Integrity Monitoring (FIM) PowerShell Scripts
 
 # Overview
 These PowerShell scripts are designed to provide File Integrity Monitoring (FIM) capabilities. The primary script, CheckFileIntegrity.ps1, checks the integrity of specified files and registry keys by comparing their current state with a previously saved baseline. The second script, MakeBaselineHash.ps1, generates the initial baselines for files and registry keys.
@@ -20,7 +20,6 @@ All log messages are written to a log file located at C:\ProgramData\fim\logs\fi
 
 # Windows Event Log
 Events are logged to the Windows Event Log under the Application log with the source FIM.
-
 Event IDs
 - 111: File Integrity Scan Started
 - 222: File changes detected
@@ -40,13 +39,6 @@ Event IDs
 - Differences in Protected Files: C:\programdata\fim\differences_protected_files_hashes.txt
 - Log File: C:\ProgramData\fim\logs\fim.log
 - Temp Folder: C:\programdata\fim\temp
-
-# Installation
-1. Place CheckFileIntegrity.ps1 and MakeBaselineHash.ps1 in a directory.
-2. Create the necessary folders and files as specified in the File Paths section.
-3. Modify the ossec.conf file to include the directories and registry keys to monitor.
-4. Run MakeBaselineHash.ps1 to create the initial baselines.
-5. Schedule CheckFileIntegrity.ps1 to run at desired intervals to monitor file and registry integrity.
 
 # Notes
 Ensure you have the necessary permissions to read the files and registry keys and to write to the log and baseline files.
