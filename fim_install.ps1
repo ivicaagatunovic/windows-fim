@@ -59,9 +59,16 @@ if (-Not (Test-Path -Path $differencesRegistryPath)) {
 Copy-Item -Path "$localConfigPath\*" -Destination $fimFolderPath -Recurse -Force
 
 # Create the scheduled task for file/registry integrity check
-$scheduleTaskName = 'FIM - Check File Integrity'
+# Define action, trigger, and principal
 $scheduleTaskAction = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument "$powershell_arguments `"$check_file_integrity_script`""
 $scheduleTaskTrigger = New-ScheduledTaskTrigger -Daily -At $fimscanscheduletime
 $scheduleTaskPrincipal = New-ScheduledTaskPrincipal -UserId 'SYSTEM' -LogonType ServiceAccount
 
-Register-ScheduledTask -Action $scheduleTaskAction -Trigger $scheduleTaskTrigger -Principal $scheduleTaskPrincipal -TaskName $scheduleTaskName -Description 'FIM - Check File Integrity' -RunLevel Highest
+# Create the task definition without -RunLevel
+$taskDefinition = New-ScheduledTask -Action $scheduleTaskAction `
+                                     -Trigger $scheduleTaskTrigger `
+                                     -Principal $scheduleTaskPrincipal `
+                                     -Description 'FIM - Check File Integrity'
+
+# Register the scheduled task
+Register-ScheduledTask -TaskName 'FIM - Check File Integrity' -InputObject $taskDefinition
